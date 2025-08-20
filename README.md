@@ -1,59 +1,86 @@
-# PhoneRepairApp
+# 📱 Innpactia Frontend Test - Phone Repair App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.0.
+Este proyecto es el **frontend en Angular 20.2.0** para el sistema de gestión de reparaciones de celulares.  
+Se conecta al [backend](https://github.com/ElkinNocuaDev/innpactia-backend-test) mediante una API RESTful e implementa autenticación, gestión de clientes, teléfonos y reparaciones.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🚀 Tecnologías utilizadas
+- **Angular 20.2.0**
+- **TypeScript**
+- **RxJS**
+- **Angular Router**
+- **Reactive Forms**
+- **TailwindCSS** para estilos modernos
+- **JWT Auth** (manejo de token con interceptor HTTP)
+
+---
+
+## 🔧 Requisitos previos
+Antes de ejecutar el proyecto, asegúrate de tener instalado:
+- [Node.js](https://nodejs.org/) (v18+ recomendado)  
+- [Angular CLI](https://angular.dev/tools/cli)  
+- Backend en ejecución → [Innpactia Backend Test](https://github.com/ElkinNocuaDev/innpactia-backend-test)  
+
+---
+
+## 📦 Instalación
+
+Clona el repositorio:
 
 ```bash
+git clone https://github.com/ElkinNocuaDev/innpactia-frontend-test.git
+cd innpactia-frontend-test
+
+Instala dependencias:
+
+npm install
+
+---
+
+Ejecución del servidor
+
 ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+La aplicación estará disponible en:
+👉 http://localhost:4200/
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Autenticación
 
-```bash
-ng generate component component-name
-```
+Los usuarios deben registrarse o iniciar sesión en la aplicación.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+El token JWT se almacena en localStorage y se añade automáticamente en cada request mediante un interceptor.
 
-```bash
-ng generate --help
-```
+Rutas protegidas utilizan un AuthGuard.
 
-## Building
+---
 
-To build the project run:
+📚 Funcionalidades principales
 
-```bash
-ng build
-```
+👤 Gestión de clientes
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Ver lista de clientes
 
-## Running unit tests
+Crear nuevo cliente
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+📱 Gestión de teléfonos
 
-```bash
-ng test
-```
+Consultar teléfonos asociados a un cliente
 
-## Running end-to-end tests
+Registrar nuevo teléfono
 
-For end-to-end (e2e) testing, run:
+🛠 Gestión de reparaciones
 
-```bash
-ng e2e
-```
+Ver todas las reparaciones
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Ver reparaciones por teléfono
 
-## Additional Resources
+Registrar nueva reparación
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+
+👨‍💻 Autor
+
+Elkin Nocua Dev
