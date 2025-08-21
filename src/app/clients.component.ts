@@ -10,39 +10,32 @@ import { Client, CreateClientDto } from './models';
   standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
-    <div class="max-w-lg mx-auto mt-10 p-6 border rounded-lg shadow">
-      <h2 class="text-xl font-bold mb-4">Clientes</h2>
+    <div class="clients-card">
+  <h2>Clientes</h2>
 
-      <!-- Formulario para agregar cliente -->
-      <form (ngSubmit)="addClient()" #clientForm="ngForm" class="space-y-2 mb-6">
-        <input type="text" name="fullName" [(ngModel)]="newClient.fullName" placeholder="Nombre completo"
-          required class="w-full border px-2 py-1 rounded" />
+  <!-- Formulario para agregar cliente -->
+  <form (ngSubmit)="addClient()" #clientForm="ngForm" class="client-form">
+    <input type="text" name="fullName" [(ngModel)]="newClient.fullName" placeholder="Nombre completo" required />
+    <input type="email" name="email" [(ngModel)]="newClient.email" placeholder="Email" required />
+    <input type="text" name="phone" [(ngModel)]="newClient.phone" placeholder="Teléfono" required />
 
-        <input type="email" name="email" [(ngModel)]="newClient.email" placeholder="Email"
-          required class="w-full border px-2 py-1 rounded" />
+    <button type="submit" [disabled]="clientForm.invalid">Agregar Cliente</button>
+  </form>
 
-        <input type="text" name="phone" [(ngModel)]="newClient.phone" placeholder="Teléfono"
-          required class="w-full border px-2 py-1 rounded" />
+  <!-- Lista de clientes -->
+  <ul *ngIf="clients.length > 0; else noClients" class="client-list">
+    <li *ngFor="let client of clients" class="client-item">
+      <strong>{{ client.full_name }}</strong>
+      <span>{{ client.email }}</span>
+      <span>{{ client.phone }}</span>
+    </li>
+  </ul>
 
-        <button type="submit" [disabled]="clientForm.invalid"
-          class="bg-green-600 text-white px-4 py-2 rounded w-full">
-          Agregar Cliente
-        </button>
-      </form>
+  <ng-template #noClients>
+    <p class="no-clients">No hay clientes registrados.</p>
+  </ng-template>
+</div>
 
-      <!-- Lista de clientes -->
-      <ul *ngIf="clients.length > 0; else noClients" class="space-y-2">
-        <li *ngFor="let client of clients" class="border p-2 rounded">
-          <strong>{{ client.full_name }}</strong><br />
-          <small>{{ client.email }}</small><br />
-          <small>{{ client.phone }}</small>
-        </li>
-      </ul>
-
-      <ng-template #noClients>
-        <p class="text-gray-500">No hay clientes registrados.</p>
-      </ng-template>
-    </div>
   `
 })
 export class ClientsComponent implements OnInit {

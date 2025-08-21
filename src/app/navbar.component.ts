@@ -9,19 +9,19 @@ import { AuthService } from './auth.service';
   standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
-    <nav class="bg-gray-800 text-white px-4 py-3 flex justify-between items-center shadow">
-      <div class="flex gap-4">
-        <a *ngIf="isLoggedIn()" routerLink="/clients" routerLinkActive="font-bold underline">Clientes</a>
-        <a *ngIf="isLoggedIn()" routerLink="/phones" routerLinkActive="font-bold underline">Teléfonos</a>
-        <a *ngIf="isLoggedIn()" routerLink="/repairs" routerLinkActive="font-bold underline">Reparaciones</a>
-      </div>
-      <div>
-        <a *ngIf="!isLoggedIn()" routerLink="/login" routerLinkActive="font-bold underline">Login</a>
-        <button *ngIf="isLoggedIn()" (click)="logout()" class="bg-red-600 px-3 py-1 rounded">
-          Logout
-        </button>
-      </div>
-    </nav>
+    <nav class="navbar">
+  <div class="nav-links">
+    <a *ngIf="isLoggedIn()" routerLink="/clients" routerLinkActive="active">Clientes</a>
+    <a *ngIf="isLoggedIn()" routerLink="/phones" routerLinkActive="active">Teléfonos</a>
+    <a *ngIf="isLoggedIn()" routerLink="/repairs" routerLinkActive="active">Reparaciones</a>
+  </div>
+
+  <div class="nav-actions">
+    <a *ngIf="!isLoggedIn()" routerLink="/login" routerLinkActive="active">Login</a>
+    <button *ngIf="isLoggedIn()" (click)="logout()" class="logout-btn">Logout</button>
+  </div>
+</nav>
+
   `
 })
 export class NavbarComponent {

@@ -9,28 +9,25 @@ import { PhonesService, Phone } from './phones.service';
   standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
-    <div class="max-w-lg mx-auto mt-10 p-6 border rounded-lg shadow">
-      <h2 class="text-xl font-bold mb-4">Teléfonos por Cliente</h2>
+    <div class="phones-card">
+  <h2>Teléfonos por Cliente</h2>
 
-      <div class="flex gap-2 mb-4">
-        <input [(ngModel)]="clientId" placeholder="ID del cliente"
-          class="flex-1 border px-2 py-1 rounded" />
-        <button (click)="loadPhones()" class="bg-blue-600 text-white px-4 py-2 rounded">
-          Buscar
-        </button>
-      </div>
+  <div class="phone-search">
+    <input [(ngModel)]="clientId" placeholder="ID del cliente" />
+    <button (click)="loadPhones()">Buscar</button>
+  </div>
 
-      <ul *ngIf="phones.length > 0; else noData" class="space-y-2">
-        <li *ngFor="let phone of phones" class="border p-2 rounded">
-          <strong>{{ phone.brand }} {{ phone.model }}</strong><br />
-          <small>IMEI: {{ phone.imei || 'N/A' }}</small>
-        </li>
-      </ul>
+  <ul *ngIf="phones.length > 0; else noData" class="phone-list">
+    <li *ngFor="let phone of phones" class="phone-item">
+      <strong>{{ phone.brand }} {{ phone.model }}</strong>
+      <span>IMEI: {{ phone.imei || 'N/A' }}</span>
+    </li>
+  </ul>
 
-      <ng-template #noData>
-        <p class="text-gray-500">No se encontraron teléfonos.</p>
-      </ng-template>
-    </div>
+  <ng-template #noData>
+    <p class="no-phones">No se encontraron teléfonos.</p>
+  </ng-template>
+</div>
   `
 })
 export class PhonesComponent {

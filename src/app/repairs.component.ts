@@ -9,49 +9,46 @@ import { RepairsService, Repair, CreateRepairDto } from './repairs.service';
   standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
-    <div class="max-w-lg mx-auto mt-10 p-6 border rounded-lg shadow">
-      <h2 class="text-xl font-bold mb-4">Reparaciones</h2>
+    <div class="repairs-card">
+  <h2>Reparaciones</h2>
 
-      <!-- Buscar reparaciones por phoneId -->
-      <div class="flex gap-2 mb-4">
-        <input [(ngModel)]="phoneId" placeholder="ID del teléfono"
-          class="flex-1 border px-2 py-1 rounded" />
-        <button (click)="loadRepairs()" class="bg-blue-600 text-white px-4 py-2 rounded">
-          Buscar
-        </button>
-      </div>
+  <!-- Buscar reparaciones -->
+  <div class="repair-search">
+    <input [(ngModel)]="phoneId" placeholder="ID del teléfono" />
+    <button (click)="loadRepairs()">Buscar</button>
+  </div>
 
-      <!-- Lista de reparaciones -->
-      <ul *ngIf="repairs.length > 0; else noRepairs" class="space-y-2 mb-6">
-        <li *ngFor="let repair of repairs" class="border p-2 rounded">
-          <strong>{{ repair.description }}</strong><br />
-          <small>Estado: {{ repair.status }}</small>
-        </li>
-      </ul>
+  <!-- Lista de reparaciones -->
+  <ul *ngIf="repairs.length > 0; else noRepairs" class="repair-list">
+    <li *ngFor="let repair of repairs" class="repair-item">
+      <strong>{{ repair.description }}</strong>
+      <span class="status {{ repair.status }}">
+        Estado: {{ repair.status }}
+      </span>
+    </li>
+  </ul>
 
-      <ng-template #noRepairs>
-        <p class="text-gray-500">No hay reparaciones para este teléfono.</p>
-      </ng-template>
+  <ng-template #noRepairs>
+    <p class="no-repairs">No hay reparaciones para este teléfono.</p>
+  </ng-template>
 
-      <!-- Formulario para nueva reparación -->
-      <h3 class="text-lg font-semibold mt-6 mb-2">Nueva Reparación</h3>
-      <form (ngSubmit)="addRepair()" #repairForm="ngForm" class="space-y-2">
-        <input type="text" name="description" [(ngModel)]="newRepair.description"
-          placeholder="Descripción" required class="w-full border px-2 py-1 rounded" />
+  <!-- Formulario -->
+  <h3 class="form-title">Nueva Reparación</h3>
+  <form (ngSubmit)="addRepair()" #repairForm="ngForm" class="repair-form">
+    <input type="text" name="description" [(ngModel)]="newRepair.description"
+      placeholder="Descripción" required />
 
-        <select name="status" [(ngModel)]="newRepair.status" required
-          class="w-full border px-2 py-1 rounded">
-          <option value="pending">Pendiente</option>
-          <option value="in-progress">En progreso</option>
-          <option value="completed">Completado</option>
-        </select>
+    <select name="status" [(ngModel)]="newRepair.status" required>
+      <option value="pending">Pendiente</option>
+      <option value="in-progress">En progreso</option>
+      <option value="completed">Completado</option>
+    </select>
 
-        <button type="submit" [disabled]="!phoneId || repairForm.invalid"
-          class="bg-green-600 text-white px-4 py-2 rounded w-full">
-          Agregar Reparación
-        </button>
-      </form>
-    </div>
+    <button type="submit" [disabled]="!phoneId || repairForm.invalid">
+      Agregar Reparación
+    </button>
+  </form>
+</div>
   `
 })
 export class RepairsComponent {
